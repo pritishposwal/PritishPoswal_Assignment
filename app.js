@@ -59,7 +59,7 @@ app.get('/user/rank/:uid', (req, res) => {
             res.send(JSON.stringify("Rank not found", null, 4));
         }
         else{
-            res.send(JSON.stringify(results[0].rankofuser, null, 4));
+            res.send(JSON.stringify("Rank is " + results[0].rankofuser, null, 4));
         }
     });
 });
