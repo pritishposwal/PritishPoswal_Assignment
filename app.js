@@ -28,7 +28,8 @@ app.get('/leaderboard/current', (req, res) => {
       if (error) {
         return res.status(500).json({ error });
       }
-      res.json(results);
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(results, null, 4)); // Indent with 4 spaces
     });
   });
   
@@ -40,7 +41,8 @@ app.get('/leaderboard/lastweek/:country', (req, res) => {
       if (error) {
         return res.status(500).json({ error });
       }
-      res.json(results);
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(results, null, 4)); // Indent with 4 spaces
     });
   });
   
@@ -52,7 +54,13 @@ app.get('/user/rank/:uid', (req, res) => {
         if (error) {
             return res.status(500).json({ error });
         }
-        res.json(results.length ? results[0] : { rank: "Not found" });
+        res.setHeader('Content-Type', 'application/json');
+        if(results[0].rankofuser == 0){
+            res.send(JSON.stringify("Rank not found", null, 4));
+        }
+        else{
+            res.send(JSON.stringify(results[0].rankofuser, null, 4));
+        }
     });
 });
 // we are using PORT 3000 for our server and we are logging a message to the console that the server is running on port 3000.
